@@ -14,10 +14,13 @@
 <link href="css/responsive.css" rel="stylesheet">
 
 
+<!-- Include the Borderless theme -->
+<!-- <link rel="stylesheet" href="@sweetalert2/theme-borderless/borderless.css">
+
+<script src="sweetalert2/dist/sweetalert2.min.js"></script> -->
 
 
-
-
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 
 
@@ -859,7 +862,7 @@
                                                         <textarea name="fieldname" id="message" placeholder="Message" required></textarea>
                                                     </div>
                                                     <div class="form-group">
-                                                        <button type="submit" class="theme-btn btn-style-one"><span>Send message</span></button>
+                                                        <button id="mysubmit" type="submit" class="theme-btn btn-style-one"><span>Send message</span></button>
                                                     </div>
                                                 </div>
                                             </div>
@@ -896,9 +899,25 @@
 
 
 <script type="text/javascript">
+
+
+
+
+
+
     window.onload = function() {
+
+ 
+
+       
+          
+
         document.getElementById('contact-form').addEventListener('submit', function(event) {
             event.preventDefault();
+
+
+
+          
 
          var visitormail=   document.getElementById('email').value;
          var msg=   document.getElementById('message').value;
@@ -916,7 +935,32 @@
                 message: msg,
                 name:username,
                     reply_to: visitormail,
-                                                            });
+                                                            }).then(function() {
+
+
+                                                             
+                                                                
+                    console.log('SUCCESS!');
+                   
+                    swal({
+            text: "Email sent succesfully !",
+                icon: "success",
+            });
+
+
+                }, function(error) {
+                    console.log('FAILED...', error);
+                  
+
+
+                    swal({
+                title: "Something went wrong !!",
+            text: "Please try again after sometime ...",
+                icon: "error",
+            });
+
+
+                });
         });
     }
 </script>
